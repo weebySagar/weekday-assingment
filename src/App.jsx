@@ -1,5 +1,7 @@
+import JobPage from "./pages/JobPage";
+
 function App() {
-  return <h1>Hello</h1>;
+  return <JobPage />;
 }
 
 export default App;
