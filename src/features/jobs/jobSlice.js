@@ -5,13 +5,14 @@ import axios from 'axios';
 // initial state
 const initialState = {
     jobs: [],
+    filteredJobs: [],
     totalCount: 0,
     loading: false,
     error: null,
     currentPage: 0, //current page
     pageSize: 20,  // number of jobs per page
     filters: {
-        selectedJobRole: '',
+        selectedJobRole: [],
         experience: '',
         minimumSalary: 0,
         location: ''
@@ -50,6 +51,25 @@ const jobSlice = createSlice({
                 ...state.filters,
                 ...action.payload
             }
+        },
+        filterJobs(state) {
+            if (state.filters.minimumSalary === 0 && state.filters.experience === '' && state.filters.location === '' && state.filters.selectedJobRole.length === 0) {
+                state.filteredJobs = state.jobs
+            }
+            else {
+
+
+                state.filteredJobs = state.jobs.filter(job => {
+                    return (
+                        job.minJdSalary >= state.filters.minimumSalary &&
+                        job.minExp >= state.filters.experience &&
+                        (state.filters.location === '' || job.location.includes(state.filters.location)) &&
+                        (state.filters.selectedJobRole.length === 0 || state.filters.selectedJobRole.includes(job.jobRole))
+
+                    );
+                })
+            }
+
         }
     },
     extraReducers: (builder) => {
@@ -59,7 +79,8 @@ const jobSlice = createSlice({
         }).addCase(fetchJobs.fulfilled, (state, action) => {
             state.loading = false,
                 state.jobs.push(...action.payload.jobs),
-                state.error = null,
+                state.filteredJobs.push(...action.payload.jobs)
+            state.error = null,
                 state.totalCount = action.payload.totalCount
             state.currentPage++
         }).addCase(fetchJobs.rejected, (state, action) => {
@@ -70,7 +91,7 @@ const jobSlice = createSlice({
     }
 })
 
-export const { setFilterValues, setJobValues } = jobSlice.actions
+export const { setFilterValues, setJobValues, filterJobs } = jobSlice.actions
 export default jobSlice.reducer;
 
 
