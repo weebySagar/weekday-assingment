@@ -8,8 +8,8 @@ const initialState = {
     totalCount: 0,
     loading: false,
     error: null,
-    currentPage: 1, //current page
-    jobSize: 10  // number of jobs per page
+    currentPage: 0, //current page
+    pageSize: 20  // number of jobs per page
 }
 
 
@@ -39,7 +39,7 @@ const jobSlice = createSlice({
                 state.jobs.push(...action.payload.jobs),
                 state.error = null,
                 state.totalCount = action.payload.totalCount
-            // state.currentPage++
+            state.currentPage++
         }).addCase(fetchJobs.rejected, (state, action) => {
             state.loading = false,
                 state.error = action.error.message
