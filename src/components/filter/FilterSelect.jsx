@@ -15,7 +15,7 @@ const FilterSelect = ({ id, title, menuItemData, name }) => {
     dispatch(setFilterValues({ [name]: value }));
   };
   return (
-    <FormControl sx={{ m: 1, width: 300 }}>
+    <FormControl fullWidth>
       <InputLabel id={id}>{title}</InputLabel>
       <Select
         labelId={id}

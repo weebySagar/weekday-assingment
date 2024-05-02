@@ -35,7 +35,7 @@ const FilterMultipleSelect = ({ name, id, title, menuItemData }) => {
   };
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl fullWidth>
         <InputLabel id={id}>{title}</InputLabel>
         <Select
           name={name}

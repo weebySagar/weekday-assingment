@@ -1,4 +1,4 @@
-import { Input, OutlinedInput } from "@mui/material";
+import { OutlinedInput } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setFilterValues } from "../../features/jobs/jobSlice";
@@ -19,7 +19,12 @@ const SearchInput = (props) => {
   }, [debouncedValue, dispatch, props.name]);
   return (
     <div>
-      <OutlinedInput {...props} value={value} onChange={handleChange} />
+      <OutlinedInput
+        {...props}
+        value={value}
+        onChange={handleChange}
+        fullWidth
+      />
     </div>
   );
 };
