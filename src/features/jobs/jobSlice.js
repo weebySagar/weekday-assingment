@@ -9,7 +9,16 @@ const initialState = {
     loading: false,
     error: null,
     currentPage: 0, //current page
-    pageSize: 20  // number of jobs per page
+    pageSize: 20,  // number of jobs per page
+    filters: {
+        selectedJobRole: '',
+        experience: '',
+        minimumSalary: 0,
+        location: ''
+    },
+    jobRoles: ['backend', 'frontend', 'fullstack', 'ios', 'flutter', 'react native', 'android', 'tech lead', 'dev-ops', 'data engineer', 'data science', 'computer-vision', 'nlp', 'deep-learning', 'test / Qa', 'web3', 'sre', 'data infrastructre'],
+    experience: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    minSalary: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 }
 
 
@@ -28,7 +37,20 @@ const jobSlice = createSlice({
     name: 'jobs',
     initialState,
     reducers: {
+        setFilterValues(state, action) {
 
+            state.filters = {
+                ...state.filters,
+                ...action.payload
+            }
+        },
+
+        setJobValues(state, action) {
+            state.filters = {
+                ...state.filters,
+                ...action.payload
+            }
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchJobs.pending, (state) => {
@@ -48,7 +70,7 @@ const jobSlice = createSlice({
     }
 })
 
-
+export const { setFilterValues, setJobValues } = jobSlice.actions
 export default jobSlice.reducer;
 
 
