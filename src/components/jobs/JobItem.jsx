@@ -26,8 +26,16 @@ const JobItem = ({
   };
 
   return (
-    <Card variant="outlined" sx={{ borderRadius: "12px" }}>
-      <CardContent>
+    <Card
+      variant="outlined"
+      sx={{
+        borderRadius: "12px",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+      }}
+    >
+      <CardContent sx={{ flexGrow: "1" }}>
         <Box className="job-details">
           <Typography
             variant="h3"
@@ -51,7 +59,10 @@ const JobItem = ({
 
         <Box className="salary" sx={{ marginTop: "10px" }}>
           <Typography sx={{ color: "gray" }}>
-            Estimated Salary: {minSalary}-{maxSalary}
+            {!minSalary
+              ? `Estimated Salary: ${maxSalary} USD
+`
+              : `Estimated Salary: ${minSalary} - ${maxSalary} USD`}
           </Typography>
         </Box>
 
@@ -68,12 +79,16 @@ const JobItem = ({
             </Button>
           </Typography>
 
-          <Typography
-            sx={{ marginTop: "20px", fontSize: "16px", color: "gray" }}
-          >
-            Minimum Experience
-          </Typography>
-          <Typography>{minExp}</Typography>
+          {minExp && (
+            <>
+              <Typography
+                sx={{ marginTop: "20px", fontSize: "16px", color: "gray" }}
+              >
+                Minimum Experience
+              </Typography>
+              <Typography>{minExp} years</Typography>
+            </>
+          )}
         </Box>
       </CardContent>
 
