@@ -108,7 +108,7 @@ const JobItem = ({
               target="_blank"
               startIcon={
                 <i
-                  class="fa-solid fa-bolt-lightning"
+                  className="fa-solid fa-bolt-lightning"
                   style={{ color: "#ffd341" }}
                 ></i>
               }
